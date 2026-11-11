@@ -29,3 +29,6 @@ Thumbs.db
 .env.local
 design/
 result
+
+# Local build script
+build.sh

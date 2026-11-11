@@ -103,7 +103,7 @@ pub fn handle_help(
             app.toggle_help();
             true
         }
-        KeyCode::Char('j') if vim => {
+        KeyCode::Char('l') if vim => {
             app.help_scroll_down(max_scroll);
             true
         }
