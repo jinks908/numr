@@ -128,9 +128,11 @@ pub fn draw_help_popup(
     };
     let help_rows_count = all_rows.len();
 
-    let max_visible_rows = area.height.saturating_sub(6) as usize;
+    let max_visible_rows = area.height.saturating_sub(7) as usize;
     let content_height = (max_visible_rows + 5).min(area.height.saturating_sub(4) as usize) as u16;
-    let content_width = 46_u16.min(area.width.saturating_sub(6));
+    let content_width = (area.width * 2 / 5)
+        .max(60)
+        .min(area.width.saturating_sub(6));
 
     // Render popup frame (clear, background, title, separator)
     let content_area = render_popup_frame(frame, area, content_width, content_height, Some(title));
@@ -250,7 +252,7 @@ fn standard_help_rows() -> Vec<Row<'static>> {
 
 /// Calculate max scroll offset for help popup
 pub fn help_max_scroll(area_height: u16, keybinding_mode: KeybindingMode) -> usize {
-    let max_visible = area_height.saturating_sub(6) as usize;
+    let max_visible = area_height.saturating_sub(7) as usize;
     let rows_count = match keybinding_mode {
         KeybindingMode::Vim => vim_help_rows().len(),
         KeybindingMode::Standard => standard_help_rows().len(),
